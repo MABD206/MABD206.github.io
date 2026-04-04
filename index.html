@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Abdullah — Data Analyst & ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --bg: #0a0e0f;
+    --surface: #111617;
+    --surface2: #181e20;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00e5a0;
+    --accent2: #00b4d8;
+    --indigo: #6366f1;
+    --text: #e8ede9;
+    --muted: #7a8a80;
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none; z-index: 999; opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,14,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.08em; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 5rem; position: relative; overflow: hidden; }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,229,160,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 65%); top: -150px; right: -150px; pointer-events: none; }
+  .hero-content { position: relative; max-width: 900px; }
+  .hero-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(0,229,160,0.3); padding: 0.4rem 1rem; margin-bottom: 2rem; animation: fadeUp 0.6s ease both; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; animation: fadeUp 0.6s 0.1s ease both; }
+  h1 .line2 { color: var(--accent); display: block; }
+  .hero-sub { margin-top: 1.5rem; font-size: 1.1rem; color: var(--muted); max-width: 580px; line-height: 1.8; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-ctas { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary { padding: 0.85rem 2rem; background: var(--accent); color: #0a0e0f; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,160,0.25); }
+  .btn-ghost { padding: 0.85rem 2rem; background: transparent; color: var(--text); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .section-title span { color: var(--accent); }
+  .max-w { max-width: 1100px; margin: 0 auto; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; line-height: 1.9; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat-item { background: var(--surface); padding: 1.5rem; text-align: center; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); display: block; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; display: block; }
+
+  /* TOOLBOX */
+  #skills { background: var(--surface); position: relative; overflow: hidden; }
+  .toolbox-glow-l { position: absolute; top: 0; left: 25%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%); pointer-events: none; }
+  .toolbox-glow-r { position: absolute; bottom: 0; right: 25%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%); pointer-events: none; }
+  .toolbox-header { text-align: center; margin-bottom: 3rem; }
+  .toolbox-header h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .toolbox-header p { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .toolbox-header span { color: var(--accent); }
+  .toolbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.5rem; }
+  .tool-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .tool-card:hover { transform: translateY(-8px); }
+  .tool-card.c-indigo  { border-bottom: 3px solid #6366f1; }
+  .tool-card.c-blue    { border-bottom: 3px solid #3b82f6; }
+  .tool-card.c-purple  { border-bottom: 3px solid #a855f7; }
+  .tool-card.c-emerald { border-bottom: 3px solid #10b981; }
+  .tool-icon { width: 3.5rem; height: 3.5rem; border-radius: 0.875rem; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem; transition: transform 0.3s; }
+  .tool-card:hover .tool-icon { transform: scale(1.1); }
+  .tool-icon.c-indigo  { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .tool-icon.c-blue    { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .tool-icon.c-purple  { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .tool-icon.c-emerald { background: rgba(16,185,129,0.15); color: #34d399; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .tool-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+  .tool-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border: 1px solid rgba(99,102,241,0.25); background: rgba(99,102,241,0.05); color: var(--text); border-radius: 0.4rem; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+  .tool-tag:hover { background: rgba(99,102,241,0.18); border-color: var(--indigo); color: #fff; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .project-card { background: var(--surface); padding: 2rem; position: relative; overflow: hidden; transition: background 0.2s; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+  .project-card:hover { background: var(--surface2); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .project-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.6rem; display: block; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.3; }
+  .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .project-techs { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tech-chip { font-family: 'DM Mono', monospace; font-size: 0.65rem; padding: 0.2rem 0.6rem; background: rgba(0,180,216,0.1); color: var(--accent2); border: 1px solid rgba(0,180,216,0.2); border-radius: 0.25rem; }
+
+  /* KEY ACHIEVEMENTS */
+  #achievements { background: var(--bg); }
+  .achieve-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+  .ach-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 2rem; position: relative; overflow: hidden; transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .ach-card:hover { transform: translateY(-6px); }
+  .ach-card.span-8 { grid-column: span 8; }
+  .ach-card.span-4 { grid-column: span 4; }
+  .ach-card.span-6 { grid-column: span 6; }
+  .ach-card.bd-indigo  { border-left: 4px solid #6366f1; }
+  .ach-card.bd-blue    { border-top: 4px solid #3b82f6; }
+  .ach-card.bd-purple  { border-bottom: 4px solid #a855f7; }
+  .ach-card.bd-emerald { border-bottom: 4px solid #10b981; }
+  .ach-card.bd-amber   { border-right: 4px solid #f59e0b; }
+  .ach-bg-icon { position: absolute; right: -1rem; top: -1rem; font-size: 7rem; opacity: 0.07; pointer-events: none; color: #6366f1; }
+  .ach-supertitle { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #818cf8; margin-bottom: 0.5rem; }
+  .ach-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .ach-body { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+  .ach-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+  .ach-chip { font-family: 'DM Mono', monospace; font-size: 0.65rem; padding: 0.25rem 0.7rem; border-radius: 999px; background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.25); }
+  .ach-status { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 0.75rem; color: #60a5fa; }
+  .ach-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .ach-icon.indigo  { color: #818cf8; }
+  .ach-icon.blue    { color: #60a5fa; }
+  .ach-icon.purple  { color: #c084fc; }
+  .ach-icon.emerald { color: #34d399; }
+  .ach-icon.amber   { color: #fbbf24; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--surface); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); }
+  .timeline-item { position: relative; margin-bottom: 3rem; }
+  .timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.4rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(0,229,160,0.5); }
+  .timeline-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.4rem; }
+  .timeline-meta span { color: var(--accent); }
+  .timeline-role { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .timeline-org { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+  /* EDUCATION */
+  #education { background: var(--bg); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 2rem; padding: 2.5rem; position: relative; overflow: hidden; transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .edu-card:hover { transform: translateY(-8px); }
+  .edu-card.primary { border-top: 2px solid rgba(99,102,241,0.5); }
+  .edu-card.secondary { border-top: 2px solid rgba(255,255,255,0.08); }
+  .edu-glow { position: absolute; right: -3rem; top: -3rem; width: 160px; height: 160px; background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%); pointer-events: none; }
+  .edu-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 0.3rem; background: rgba(99,102,241,0.1); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.2); margin-bottom: 0.75rem; }
+  .edu-badge.dim { background: rgba(255,255,255,0.04); color: var(--muted); border-color: var(--border); }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #818cf8; margin-bottom: 0.4rem; }
+  .edu-year.dim { color: var(--muted); }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .edu-school { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
+  .edu-desc { font-size: 0.85rem; color: var(--muted);  line-height: 1.6; margin-bottom: 1.25rem; }
+  .edu-tags-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; opacity: 0.6; }
+  .edu-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .edu-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 0.4rem; border: 1px solid rgba(99,102,241,0.25); background: rgba(99,102,241,0.05); color: var(--text); transition: background 0.2s, color 0.2s; }
+  .edu-tag:hover { background: rgba(99,102,241,0.15); color: #fff; }
+
+  /* CONTACT */
+  #contact { text-align: center; padding: 8rem 3rem; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-email { font-family: 'DM Mono', monospace; font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,229,160,0.3); padding-bottom: 0.1rem; display: inline-block; margin: 1.5rem 0 2.5rem; transition: border-color 0.2s; }
+  .contact-email:hover { border-color: var(--accent); }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 3rem; display: flex; align-items: center; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .achieve-grid { display: flex; flex-direction: column; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid, .edu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <!--<a href="#" class="nav-logo">MA_</a>-->
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Toolbox</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Data Analyst &amp; ML Engineer · Copenhagen, Denmark</div>
+    <h1>Muhammad<span class="line2">Abdullah</span></h1>
+    <p class="hero-sub">
+      Applying machine learning and computer vision to real-world problems in
+      <strong style="color:var(--text)">fisheries management</strong>,
+      <strong style="color:var(--text)">marine conservation</strong>, and
+      <strong style="color:var(--text)">environmental research</strong>.
+      MSc Data Science &amp; AI · DTU Aqua.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <p class="section-label" style="text-align:center;">About</p>
+    <h2 class="section-title" style="text-align:center;">Turning data into <span>conservation impact</span></h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a <strong>Data Analyst at DTU Aqua</strong> (Technical University of Denmark) where I lead and contribute to research initiatives spanning fisheries management, marine species conservation, and advanced data analytics.</p>
+        <p>My work bridges deep learning, computer vision, and statistical analysis — from training <strong>YOLO-based object detection models</strong> for bycatch identification to developing <strong>CNNs for fish age estimation</strong> from otolith images.</p>
+        <p>I hold a <strong>Master's degree in Data Science &amp; AI from Chalmers University</strong>, where my thesis pioneered federated learning for ETP bycatch detection using electronic monitoring video feeds.</p>
+        <p>I presented two posters at the <strong>ICES Annual Science Conference 2024</strong> in Gateshead, UK, and regularly contribute processed datasets to ICES for international fisheries stock assessments.</p>
+      </div>
+      <div>
+        <div class="stat-grid">
+          <div class="stat-item"><span class="stat-num">3+</span><span class="stat-label">Years at DTU Aqua</span></div>
+          <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label">ML Projects</span></div>
+          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">ICES Posters 2024</span></div>
+          <div class="stat-item"><span class="stat-num">15+</span><span class="stat-label">Species Classified</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLBOX -->
+<section id="skills">
+  <div class="toolbox-glow-l"></div>
+  <div class="toolbox-glow-r"></div>
+  <div class="max-w" style="position:relative;">
+    <div class="toolbox-header reveal">
+      <p >Skills</p>
+      <h2 >Technical <span>Toolbox</span></h2>
+      <!--<p>Specialized frameworks and languages for AI &amp; Environmental Analytics.</p>-->
+    </div>
+    <div class="toolbox-grid reveal">
+      <div class="tool-card c-indigo">
+        <div class="tool-icon c-indigo"><i class="fas fa-brain"></i></div>
+        <div class="tool-label">AI &amp; Deep Learning</div>
+        <div class="tool-tags">
+          <span class="tool-tag">PyTorch</span><span class="tool-tag">TensorFlow</span><span class="tool-tag">Keras</span>
+          <span class="tool-tag">YOLO</span><span class="tool-tag">CNNs</span><span class="tool-tag">Scikit-learn</span>
+          <span class="tool-tag">Federated Learning</span>
+        </div>
+      </div>
+      <div class="tool-card c-blue">
+        <div class="tool-icon c-blue"><i class="fas fa-chart-line"></i></div>
+        <div class="tool-label">Analysis &amp; Viz</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Pandas</span><span class="tool-tag">NumPy</span><span class="tool-tag">Shiny</span>
+          <span class="tool-tag">ggplot2</span><span class="tool-tag">Leaflet</span><span class="tool-tag">Matplotlib</span>
+          <span class="tool-tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="tool-card c-purple">
+        <div class="tool-icon c-purple"><i class="fas fa-code"></i></div>
+        <div class="tool-label">Languages &amp; DB</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Python</span><span class="tool-tag">R</span><span class="tool-tag">MS SQL Server</span>
+          <span class="tool-tag">MySQL</span><span class="tool-tag">C#</span><span class="tool-tag">Excel</span>
+        </div>
+      </div>
+      <div class="tool-card c-emerald">
+        <div class="tool-icon c-emerald"><i class="fas fa-microchip"></i></div>
+        <div class="tool-label">Research &amp; Ops</div>
+        <div class="tool-tags">
+          <span class="tool-tag">InterCatch</span><span class="tool-tag">Docker</span><span class="tool-tag">Git</span>
+          <span class="tool-tag">NVIDIA/CUDA</span><span class="tool-tag">Big Data</span><span class="tool-tag">ICES Standards</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <p class="section-label" style="text-align:center;"> Projects </p>
+    <h2 class="section-title" style="text-align:center;">Research &amp; <span>ML Projects</span></h2>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <span class="project-icon">🐟</span>
+        <span class="project-tag">Computer Vision · Deep Learning</span>
+        <div class="project-title">Fish Age Detection via Otolith Images</div>
+        <p class="project-desc">Leading development of a CNN-based ML model to accurately predict fish age from otolith images, in collaboration with IMagine AI. Uses preprocessing, feature extraction, and regression techniques for high-precision estimation.</p>
+        <div class="project-techs"><span class="tech-chip">CNNs</span><span class="tech-chip">PyTorch</span><span class="tech-chip">Regression</span><span class="tech-chip">Image Processing</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🎣</span>
+        <span class="project-tag">Object Detection · Conservation</span>
+        <div class="project-title">Bycatch Detection &amp; Classification</div>
+        <p class="project-desc">Built a YOLOv5-powered solution to detect and classify bycatch (PETS) in Danish and Swedish waters. Conducted a seminar at SLU Sweden on data annotation techniques to build a high-quality labeled dataset.</p>
+        <div class="project-techs"><span class="tech-chip">YOLOv5</span><span class="tech-chip">Data Labeling</span><span class="tech-chip">Conservation</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">👤</span>
+        <span class="project-tag">Privacy · Computer Vision</span>
+        <div class="project-title">Human Blurring in Video Footage</div>
+        <p class="project-desc">Solely designed and implemented a YOLOv8-based system for real-time human detection and blurring in videos. Ensures privacy and anonymity in research footage, with ongoing work for low-quality video scenarios.</p>
+        <div class="project-techs"><span class="tech-chip">YOLOv8</span><span class="tech-chip">Video Processing</span><span class="tech-chip">GDPR / Privacy</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🗺️</span>
+        <span class="project-tag">Spatial Analysis · Conservation</span>
+        <div class="project-title">Redlist — Endangered Mollusk Mapping</div>
+        <p class="project-desc">Developed preprocessing scripts for the Redlist dataset and produced maps highlighting endangered mollusk species areas, integrated into an interactive Shiny web application.</p>
+        <div class="project-techs"><span class="tech-chip">R / Shiny</span><span class="tech-chip">Leaflet</span><span class="tech-chip">Spatial Stats</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🎙️</span>
+        <span class="project-tag">NLP · Automation</span>
+        <div class="project-title">Danish Voice Model — Numeric Recognition</div>
+        <p class="project-desc">Developing an ML model to recognize spoken Danish numeric values, assisting discard fishers in recording Vernier caliper measurements and automating data entry into Excel, reducing manual errors.</p>
+        <div class="project-techs"><span class="tech-chip">Speech Recognition</span><span class="tech-chip">NLP</span><span class="tech-chip">Excel Automation</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🔬</span>
+        <span class="project-tag">Thesis · Federated Learning</span>
+        <div class="project-title">ETP Bycatch Detection — Master's Thesis</div>
+        <p class="project-desc">Developed a computer vision approach to detect endangered, protected, and threatened species in EM video feeds, using federated learning for privacy-preserving distributed training across multiple data sources.</p>
+        <div class="project-techs"><span class="tech-chip">Federated Learning</span><span class="tech-chip">Object Detection</span><span class="tech-chip">EM Systems</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🐠</span>
+        <span class="project-tag">Multi-Species · Classification</span>
+        <div class="project-title">Marine Species Detection &amp; Classification</div>
+        <p class="project-desc">Gathered image and video data for 15 marine animal species, built preprocessing pipelines, and trained detection models for automated species identification in marine environments.</p>
+        <div class="project-techs"><span class="tech-chip">Computer Vision</span><span class="tech-chip">Data Collection</span><span class="tech-chip">Classification</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">🪸</span>
+        <span class="project-tag">Environmental · Detection</span>
+        <div class="project-title">Underwater Debris Detection (ROV)</div>
+        <p class="project-desc">Developed an ML model to detect and distinguish underwater sea life from debris using imagery captured by a Remotely Operated Vehicle, supporting environmental monitoring efforts.</p>
+        <div class="project-techs"><span class="tech-chip">Object Detection</span><span class="tech-chip">ROV Imagery</span><span class="tech-chip">Deep Learning</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-icon">📊</span>
+        <span class="project-tag">Statistics · Fisheries</span>
+        <div class="project-title">Fisheries Analysis &amp; Fish Stomach Data</div>
+        <p class="project-desc">Statistical analysis of fish harvest, catch, and release trends. Developed ICES-compliant scripts for fish stomach data extraction, generating insights into dietary habits of key fish species.</p>
+        <div class="project-techs"><span class="tech-chip">R</span><span class="tech-chip">Statistical Analysis</span><span class="tech-chip">ICES</span><span class="tech-chip">ggplot2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="max-w">
+    <p class="section-label" style="text-align:center;">Highlights</p>
+    <h2 class="section-title" style="text-align:center;  margin-bottom:3rem;">Key <span>Achievements</span></h2>
+    <!--<p style="text-align:center; color:var(--accent); margin-bottom:3rem; font-size:0.95rem;">Quantifiable impact and scientific contributions in Data Science &amp; AI.</p>-->
+    <div class="achieve-grid reveal">
+
+      <!-- Big feature card -->
+      <div class="ach-card span-8 bd-indigo">
+        <div class="ach-bg-icon"><i class="fas fa-globe-europe"></i></div>
+        <div style="position:relative; z-index:1;">
+          <div class="ach-supertitle">Global Recognition</div>
+          <div class="ach-title">ICES Annual Science Conference 2024</div>
+          <p class="ach-body">Selected to present <strong style="color:var(--text)">two research posters</strong> in Gateshead, UK — showcasing innovative AI applications in fisheries management to an international audience of marine scientists and policymakers.</p>
+          <div class="ach-chips">
+            <span class="ach-chip">Gateshead, UK</span>
+            <span class="ach-chip">Scientific Presentation</span>
+            <span class="ach-chip">International Audience</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Leadership -->
+      <div class="ach-card span-4 bd-blue">
+        <i class="fas fa-microscope ach-icon blue"></i>
+        <div class="ach-title">Technical Leadership</div>
+        <p class="ach-body">Leading the implementation of a <strong style="color:var(--text)">CNN-based model</strong> at DTU Aqua to automate and improve accuracy of fish age prediction from otolith images, in collaboration with IMagine AI.</p>
+        <div class="ach-status">Status: Actively Improving Accuracy</div>
+      </div>
+
+      <!-- Federated Learning -->
+      <div class="ach-card span-4 bd-purple">
+        <i class="fas fa-network-wired ach-icon purple"></i>
+        <div class="ach-title">ML Innovation</div>
+        <p class="ach-body">Pioneered a <strong style="color:var(--text)">Federated Learning</strong> approach for SLU Aqua — enabling distributed AI training across multiple data sources while preserving full privacy for electronic monitoring feeds.</p>
+      </div>
+
+      <!-- Process Automation -->
+      <div class="ach-card span-4 bd-emerald">
+        <i class="fas fa-microphone-alt ach-icon emerald"></i>
+        <div class="ach-title">Process Automation</div>
+        <p class="ach-body">Developed a <strong style="color:var(--text)">Danish Voice Model</strong> for numeric recognition to assist fishers, automating data entry from Vernier calipers and eliminating manual input errors.</p>
+      </div>
+
+      <!-- Privacy & Ethics -->
+      <div class="ach-card span-4 bd-amber">
+        <i class="fas fa-user-shield ach-icon amber"></i>
+        <div class="ach-title">Ethics &amp; Privacy</div>
+        <p class="ach-body">Solely developed a <strong style="color:var(--text)">YOLOv8 system</strong> for human detection and blurring in research videos, ensuring full anonymity and GDPR compliance in marine data collection workflows.</p>
+      </div>
+
+      <!-- ICES Contribution -->
+      <div class="ach-card span-6 bd-blue">
+        <i class="fas fa-database ach-icon blue"></i>
+        <div class="ach-title">ICES Data Contribution</div>
+        <p class="ach-body">Developed and submitted fully compliant fish stomach and catch datasets to <strong style="color:var(--text)">ICES</strong>, contributing to international fisheries management research and stock assessment processes.</p>
+      </div>
+
+      <!-- Conservation Impact -->
+      <div class="ach-card span-6 bd-emerald">
+        <i class="fas fa-leaf ach-icon emerald"></i>
+        <div class="ach-title">Conservation Impact</div>
+        <p class="ach-body">Built ML models detecting <strong style="color:var(--text)">15+ marine species</strong> and minimising bycatch in Danish and Swedish waters — directly contributing to environmental protection and sustainability targets.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="max-w">
+    <p class="section-label" style="text-align:center;">Experience</p>
+    <h2 class="section-title" style="text-align:center;">Work <span>History</span></h2>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-meta"><span>2022 — Present</span> · Copenhagen, Denmark</div>
+        <div class="timeline-role">Data Analyst</div>
+        <div class="timeline-org">DTU Aqua — Technical University of Denmark</div>
+        <div class="timeline-desc">Leading multiple research projects in fisheries management and marine conservation. Developing ML models for fish age detection, bycatch classification, species identification, and privacy-focused human blurring. Acting as Stock Coordinator using InterCatch for fish stock assessments. Presented work at the ICES Annual Science Conference 2024 in Gateshead, UK.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-meta"><span>2021 — 2022</span> · Gothenburg, Sweden</div>
+        <div class="timeline-role">Master Thesis Student</div>
+        <div class="timeline-org">SLU Aqua — Swedish University of Agricultural Sciences</div>
+        <div class="timeline-desc">Developed a novel federated learning approach for ETP bycatch detection using computer vision on electronic monitoring video feeds. Compared multiple object detection architectures, achieving promising results in identifying rare bycatch events under challenging conditions including poor video quality.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-meta"><span>2021 — 2022</span> · Gothenburg, Sweden</div>
+        <div class="timeline-role">AI Wizard Apprentice</div>
+        <div class="timeline-org">AI Sweden</div>
+        <div class="timeline-desc">Contributed to AI event planning and execution. Managed software setup, hardware troubleshooting, and configured NVIDIA devices for efficient ML model training at scale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="max-w">
+    <p class="section-label" style="text-align:center;">Education</p>
+    <h2 class="section-title" style="text-align:center;">Academic <span>Background</span></h2>
+    <div class="edu-grid reveal">
+      <div class="edu-card primary">
+        <div class="edu-glow"></div>
+        <div class="edu-badge">Sweden</div>
+        <div class="edu-year">2020 — 2022</div>
+        <div class="edu-degree">MSc Data Science &amp; AI</div>
+        <div class="edu-school">Chalmers University · Gothenburg, Sweden</div>
+        <p class="edu-desc">Advanced specialization in high-dimensional data analysis, deep learning architectures, and spatial statistics.</p>
+        <div class="edu-tags-label">Major Subjects &amp; Focus Areas</div>
+        <div class="edu-tags">
+          <span class="edu-tag">Computer Vision</span><span class="edu-tag">Deep Machine Learning</span>
+          <span class="edu-tag">Applied ML</span><span class="edu-tag">Image Processing</span>
+          <span class="edu-tag">Design &amp; AI Systems</span><span class="edu-tag">ML for NLP</span>
+          <span class="edu-tag">Bayesian Inference</span><span class="edu-tag">Stochastic Process</span>
+          <span class="edu-tag">Spatial Statistics</span><span class="edu-tag">Big Data Analysis</span>
+        </div>
+      </div>
+      <div class="edu-card secondary">
+        <div class="edu-badge dim">Pakistan</div>
+        <div class="edu-year dim">2015 — 2019</div>
+        <div class="edu-degree">BSc Software Engineering</div>
+        <div class="edu-school">COMSATS University · Islamabad, Pakistan</div>
+        <p class="edu-desc">Core engineering foundation in complex system design, algorithmic efficiency, and full-stack development.</p>
+        <div class="edu-tags-label">Core Engineering Curriculum</div>
+        <div class="edu-tags">
+          <span class="edu-tag">Object Oriented Programming</span><span class="edu-tag">Data Structures &amp; Algorithms</span>
+          <span class="edu-tag">Database Management</span><span class="edu-tag">Web Programming</span>
+          <span class="edu-tag">Software Engineering</span><span class="edu-tag">Data Visualization</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <p class="section-label" style="text-align:center">Contact</p>
+    <h2 class="section-title" style="text-align:center">Let's <span>connect</span></h2>
+    <p style="color:var(--muted); max-width:420px; margin:0 auto; font-size:0.95rem;">Interested in collaboration, research opportunities, or just want to talk machine learning and fisheries data?</p>
+    <a href="mailto:mabdullah.ahsan96@gmail.com" class="contact-email">mabdullah.ahsan96@gmail.com</a>
+    <div class="contact-links">
+     <!-- <a href="tel:+4581941673" class="btn-ghost">📞 +45 81 94 16 73</a>-->
+      <a href="https://www.linkedin.com/in/muhammad-abdullah-206/" target="_blank" class="btn-primary">LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Muhammad Abdullah</span>
+  <span>Data Analyst · DTU Aqua · Copenhagen</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.06 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
